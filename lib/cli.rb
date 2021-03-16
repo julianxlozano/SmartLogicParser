@@ -2,16 +2,13 @@ require_relative '../config/environment.rb'
 
 class CLI
 
-   #@@status = "in progress"
-
-   #def self.status=(status)
-    #@@status
-   #end
-
+ 
 def self.input
 
-    puts "Roses are Red, Violets are..."
-    puts "Enter a word to finish the poem!\n"
+    red= "Roses are Red,".colorize(:red)
+    blue= " Violets are...".colorize(:blue)
+    puts red + blue 
+    puts "\nEnter a word to finish the poem!\n".colorize(:yellow)
 
     input = gets.chomp.strip 
     rhyme_word = API.get_rhyme_word(input)
@@ -33,7 +30,7 @@ def self.input_after
     case 
     when input_2 == "poem history" then self.poem_history
     when input_2 == "new poem" then self.input 
-    when input_2 == "exit" then puts "Hopefully we can spit some more fire soon, Peace."
+    when input_2 == "exit" then ascii_peace
     when input_2 != "poem history" || input_2 != "new poem" ||  input_2 != "exit" then input_after 
     end
  
@@ -45,12 +42,43 @@ end
 
 def self.poem_history 
 
-    Poem.all.each.with_index(1){|poem,index|  puts "#{index}. \n \"#{poem.name}\" \n #{poem.text}" }
+    Poem.all.each.with_index(1){|poem,index|  puts "\n#{index}. \n \"#{poem.name}\" \n #{poem.text}".colorize(:yellow) }
 
     input_after
 
 
 end
+
+def self.render_ascii_art
+  puts "
+  ██████╗  ██████╗ ███████╗███╗   ███╗     ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ████████╗ ██████╗ ██████╗ 
+  ██╔══██╗██╔═══██╗██╔════╝████╗ ████║    ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗
+  ██████╔╝██║   ██║█████╗  ██╔████╔██║    ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║   ██║   ██║   ██║██████╔╝
+  ██╔═══╝ ██║   ██║██╔══╝  ██║╚██╔╝██║    ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║   ██║   ██║   ██║██╔══██╗
+  ██║     ╚██████╔╝███████╗██║ ╚═╝ ██║    ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║   ██║   ╚██████╔╝██║  ██║
+  ╚═╝      ╚═════╝ ╚══════╝╚═╝     ╚═╝     ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
+  ".colorize(:yellow)
+  end
+
+  def self.ascii_peace
+    puts "\nHopefully we can spit some more fire soon, Peace.".colorize(:yellow)
+    puts " 
+    
+    .''.    .'',
+    |  |   /  /
+    |  |  /  /
+    |  | /  /
+    |  |/  ;-._
+    }  ` _/  / ;
+    |  /` ) /  /
+    | /  /_/\_/\
+    |/  /      |
+    (  ' \ '-  |
+     \    `.  /
+      |      |
+  jxl |      |
+    ".colorize(:yellow)
+  end 
 
 
 

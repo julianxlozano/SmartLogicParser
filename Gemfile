@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 #gemspec
-
+gem 'colorize'
 gem "byebug", "~> 11.1.3"
 gem "rake", "~> 13.0"
 gem "rspec", "~> 3.10"

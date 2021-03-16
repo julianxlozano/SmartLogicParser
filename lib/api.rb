@@ -83,8 +83,10 @@ require_relative '../config/environment.rb'
 
    new_poem = Poem.new("#{rhyme_word}","Roses are red violets are #{word} \n #{raw_sentence}")
 
-        puts "Roses are red, Violets are #{word}"
-        puts raw_sentence 
+        red= "Roses are red,".colorize(:red)
+        violet=" Violets are #{word}".colorize(:blue)
+        puts "\n#{red}#{violet}" 
+        puts raw_sentence.colorize(:yellow) 
         
    else  
    raw_sentence_2 = raw_sentence.split(/[!.?]/)
@@ -93,8 +95,10 @@ require_relative '../config/environment.rb'
         if raw_sentence_3.last == rhyme_word
           raw_sentence_4 = raw_sentence_3.join(" ") 
           new_poem = Poem.new("#{rhyme_word}","Roses are red violets are #{word} \n #{raw_sentence_4}")    
-           puts "Roses are red, Violets are #{word}"
-            puts raw_sentence_4 
+            red= "Roses are red,".colorize(:red)
+            violet=" Violets are #{word}".colorize(:blue)
+            puts "\n#{red}#{violet}" 
+            puts raw_sentence_4.colorize(:yellow) 
              
         else
           #If the response doesn't fit the above criteria, it is unusable, and we tell the method to execute again.

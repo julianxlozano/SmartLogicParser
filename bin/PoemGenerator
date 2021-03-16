@@ -4,6 +4,6 @@ require_relative '../config/environment'
 
 
 
-
+CLI.render_ascii_art
 CLI.input 
 
