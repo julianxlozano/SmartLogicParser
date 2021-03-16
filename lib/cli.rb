@@ -11,7 +11,7 @@ def self.input
 
     input = gets.chomp.strip 
     rhyme_word = API.get_rhyme_word(input)
-    API.get_sentence(input)
+   # API.get_sentence(input)
 
    
 end
@@ -32,12 +32,13 @@ def self.input_after
     when input_2 != "poem history" || input_2 != "new poem" ||  input_2 != "exit" then input_after 
     end
  
+    input_2 
 
 
 end
 
 
-def self.poem_history
+def self.poem_history 
 
     Poem.all.each.with_index(1){|poem,index|  puts "#{index}. \n \"#{poem.name}\" \n #{poem.text}" }
 

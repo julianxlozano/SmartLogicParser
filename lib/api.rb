@@ -14,12 +14,17 @@ require_relative '../config/environment.rb'
         puts "Please enter a valid english word."
         CLI.input 
       else
-      rhyme_collection=  new_word.select do |word_obj|
-        word_obj['numSyllables'] >= 1 
-        end
-     final_word= rhyme_collection.sample["word"]
+
+        #for future syllable-matching functionality 
+     # rhyme_collection=  new_word.select do |word_obj|
+      #  word_obj['numSyllables'] >= 1 
+       # end
+
+     final_word= new_word.sample["word"]
+
+  
      unless final_word.include?(" ")
-         final_word
+       self.get_sentence(input_word,final_word) 
      else
         get_rhyme_word(input_word)
      end
@@ -27,8 +32,12 @@ require_relative '../config/environment.rb'
   end 
 
 
+#lsdkldk
+#Now, we're debugging why it shows "enter a valid english word" after we enter an invalid word, followed by a valid word on the next time around. JOIN ME ON THIS JOURNEY!!!!
 
-  def self.get_sentence(word)
+  def self.get_sentence(word,rhyme_word)
+
+  #  binding.pry 
    uri = URI.parse("https://api.openai.com/v1/engines/davinci/completions")
    request = Net::HTTP::Post.new(uri)
    request.content_type = "application/json"
@@ -42,10 +51,12 @@ require_relative '../config/environment.rb'
    You have made me very joyful.
    Write a sentence that ends with \"again\":
    He came back again.
-   Write a sentence that ends with \"#{rhyme_word=get_rhyme_word(word)}\":",
+   Write a sentence that ends with \"#{rhyme_word}\":",
    "max_tokens" => 20 
     })
-    if rhyme_word == nil
+
+   # binding.pry 
+   if rhyme_word == nil
       puts "Please enter a valid english word2."
       CLI.input 
     else
@@ -61,9 +72,10 @@ require_relative '../config/environment.rb'
 
    new_poem = Poem.new("#{rhyme_word}","Roses are red violets are #{word} \n #{raw_sentence}")
 
-    puts "Roses are red, Violets are #{word}"
+        puts "Roses are red, Violets are #{word}"
         puts raw_sentence 
-   elsif 
+        
+   else  #was elsif
    raw_sentence_2 = raw_sentence.split(/[!.?]/)
    raw_sentence_3 = raw_sentence_2[0].split
    
@@ -71,9 +83,10 @@ require_relative '../config/environment.rb'
           raw_sentence_4 = raw_sentence_3.join(" ") 
           new_poem = Poem.new("#{rhyme_word}","Roses are red violets are #{word} \n #{raw_sentence_4}")    
            puts "Roses are red, Violets are #{word}"
-            puts raw_sentence_4
+            puts raw_sentence_4 
+             
         else
-            get_sentence(word)
+            get_sentence(word,rhyme_word)
         end
    end 
   end
