@@ -1,21 +1,10 @@
 require_relative '../config/environment.rb'
-require 'net/http'
- require 'open-uri'
- require 'uri'
- require 'json'
+
+ class API 
 
 
-
- #class GetRhymeWords
-
- def get_input
-    puts "Choose a rhyme word"
-    input=gets.chomp.strip
-    get_rhyme_word(input)
-    end
  
- 
- def get_rhyme_word(input_word)
+ def self.get_rhyme_word(input_word)
     url= "https://api.datamuse.com/words?rel_rhy=#{input_word}"
     uri = URI.parse(url)
     response = Net::HTTP.get_response(uri)
@@ -23,11 +12,10 @@ require 'net/http'
       new_word = JSON.parse(response.body)
       if new_word.empty?
         puts "Please enter a valid english word."
-        return
+        CLI.input 
       else
       rhyme_collection=  new_word.select do |word_obj|
         word_obj['numSyllables'] >= 1 
-       # word_obj["numSyllables"] == 2 || word_obj["numSyllables"] == 1 || word_obj["numSyllables"] == 3 || word_obj["numSyllables"] == 4 || word_obj["numSyllables"] == 5
         end
      final_word= rhyme_collection.sample["word"]
      unless final_word.include?(" ")
@@ -40,7 +28,7 @@ require 'net/http'
 
 
 
-  def get_sentence(word)
+  def self.get_sentence(word)
    uri = URI.parse("https://api.openai.com/v1/engines/davinci/completions")
    request = Net::HTTP::Post.new(uri)
    request.content_type = "application/json"
@@ -57,9 +45,9 @@ require 'net/http'
    Write a sentence that ends with \"#{rhyme_word=get_rhyme_word(word)}\":",
    "max_tokens" => 20 
     })
-
     if rhyme_word == nil
-      return #We will call our CLI input function here. Perhaps this should be in the body of get_rhyme_word? 
+      puts "Please enter a valid english word2."
+      CLI.input 
     else
    req_options = {
    use_ssl: uri.scheme == "https",
@@ -70,25 +58,24 @@ require 'net/http'
    parsed = JSON.parse(response.body) 
    raw_sentence = parsed["choices"][0]["text"]
    if raw_sentence.split.last == "#{rhyme_word}." 
+
+   new_poem = Poem.new("#{rhyme_word}","Roses are red violets are #{word} \n #{raw_sentence}")
+
     puts "Roses are red, Violets are #{word}"
         puts raw_sentence 
    elsif 
    raw_sentence_2 = raw_sentence.split(/[!.?]/)
-   raw_sentence_3 = raw_sentence_2[0].split 
+   raw_sentence_3 = raw_sentence_2[0].split
+   
         if raw_sentence_3.last == rhyme_word
-          
-          
-            puts "Roses are red, Violets are #{word}"
-            puts raw_sentence_3.join(" ") 
+          raw_sentence_4 = raw_sentence_3.join(" ") 
+          new_poem = Poem.new("#{rhyme_word}","Roses are red violets are #{word} \n #{raw_sentence_4}")    
+           puts "Roses are red, Violets are #{word}"
+            puts raw_sentence_4
         else
             get_sentence(word)
         end
    end 
   end
   end
-
-  # binding.pry 
-   
-   get_sentence("terrific")
-
-#end 
+end 
