@@ -7,6 +7,3 @@ require_relative '../config/environment'
 
 CLI.input 
 
-until CLI.input_after == "exit"
-CLI.input_after
-end 
