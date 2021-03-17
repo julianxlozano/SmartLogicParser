@@ -11,6 +11,7 @@ def self.input
     puts "\nEnter a word to finish the poem!\n".colorize(:yellow)
 
     input = gets.chomp.strip 
+    puts "Hold up, I'm thinking of a good one...\n".colorize(:yellow)
     rhyme_word = API.get_rhyme_word(input)
     
     input_after
