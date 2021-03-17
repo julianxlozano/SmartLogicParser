@@ -79,6 +79,8 @@ def self.render_ascii_art
       |      |
   jxl |      |
     ".colorize(:yellow)
+
+    exit! 
   end 
 
 

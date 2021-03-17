@@ -1,2 +1,5 @@
 # PoemGenerator
-Leverages a couple of AIs to make beautiful (and sometimes hilarious) poetry. 
+Leverages Open AI's GTP-3, and DataMuse's API to make beautiful (and sometimes hilarious) poetry. 
+
+# Installation 
+
