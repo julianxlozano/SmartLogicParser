@@ -1,15 +1,12 @@
-# frozen_string_literal: true
+
 
 source "https://rubygems.org"
 
-
+#gem 'bundler', '~> 2.2', '>= 2.2.14'
 gem 'colorize'
-gem "byebug", "~> 11.1.3"
-gem "rake", "~> 13.0"
-gem "rspec", "~> 3.10"
-gem "rubocop", "~> 1.11.0"
-gem "vcr", "~> 6.0.0"
-gem "webmock", "~> 3.12.1"
+#gem 'open-uri', '~> 0.1.0'
+#gem 'uri', '~> 0.10.1'
+#gem 'json', '~> 2.5', '>= 2.5.1'
 
 
 
