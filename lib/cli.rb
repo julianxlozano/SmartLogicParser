@@ -36,7 +36,9 @@ end
 
 
 def self.sort_by_birthdate
-
+   records = Record.all 
+   birthday_sorted = records.sort_by{|r|[r.date_of_birth,r.lastname]} 
+   birthday_sorted.each{|record| puts "#{record.lastname} #{record.firstname} #{record.gender} #{record.bday} #{record.favorite_color}"}
 end
 
 

@@ -30,7 +30,7 @@ class Parser
 
                 people_data.each do |person_data|
                     details = person_data.split(",")
-                    
+  
                     person = Record.new(
                         firstname: details[1].strip,
                         lastname: details[0].strip,
