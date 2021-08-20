@@ -23,7 +23,7 @@ def self.input
       when "l" then self.sort_by_lastname_desc
       when "exit" then ascii_peace
     end
-     
+
     self.input
    
 end

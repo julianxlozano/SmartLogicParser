@@ -15,13 +15,14 @@ class Parser
 
 
     def self.slice_and_dice(raw_data)
+        raw_details = []
         raw_data.each do |raw_dataset|
             if raw_dataset.include?("|")
                 people_data = raw_dataset.split("\n")
-
                 people_data.each do |person_data|
                     details = person_data.split("|")
                     self.create_new_record(details)
+                    raw_details << details
                 end
               
             elsif raw_dataset.include?(",")
@@ -29,19 +30,25 @@ class Parser
                 people_data.each do |person_data|
                     details = person_data.split(",")
                     self.create_new_record(details)
+                    raw_details << details
                 end
             else
                 people_data = raw_dataset.split("\n")
                 people_data.each do |person_data|
                     details = person_data.split(" ")
                     self.create_new_record(details)
+                    raw_details << details
                 end
             end
         end 
+        raw_details  
 
     end
 
+   
+
     def self.create_new_record(details)
+     
         case 
         when details[-1].include?("/")  
             person = Record.new(

@@ -4,7 +4,7 @@ class Record
     @@all=[]
     attr_accessor :lastname, :firstname, :gender, :date_of_birth, :favorite_color, :bday
 
-    def initialize(lastname: "Being", firstname: "Human", gender: "N/A", date_of_birth: "1/1/1010", favorite_color:"Void Black")
+    def initialize(lastname: "Being", firstname: "Human", gender: "F", date_of_birth: "1/1/1010", favorite_color:"Void Black")
         @lastname = lastname
         @firstname = firstname
         @favorite_color = favorite_color
@@ -33,6 +33,10 @@ class Record
     def self.all
         @@all 
     end 
+
+    def self.destroy_all
+        @@all.clear
+    end
 
 
 end
