@@ -7,9 +7,12 @@ class Record
     def initialize(lastname: "Being", firstname: "Human", gender: "Non Binary", date_of_birth: "1/1/1010", favorite_color:"Void Black")
         @lastname = lastname
         @firstname = firstname
-        @date_of_birth = date_of_birth
         @favorite_color = favorite_color
         gender == "F" ? @gender = "Female" : @gender = "Male"
+        if date_of_birth.include?("-")
+            dob = date_of_birth.split("-")
+            @date_of_birth = dob.join("/")
+        end
         save 
     end
 

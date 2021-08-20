@@ -17,11 +17,11 @@ class Parser
                     details = person_data.split("|")
                     
                     person = Record.new(
-                        firstname: details[1],
-                        lastname: details[0],
-                        gender: details[3],
-                        date_of_birth: details[5],
-                        favorite_color: details[4]
+                        firstname: details[1].strip,
+                        lastname: details[0].strip,
+                        gender: details[3].strip,
+                        date_of_birth: details[5].strip,
+                        favorite_color: details[4].strip
                         )
                         binding.pry
                         p"t"
