@@ -5,6 +5,6 @@ require_relative '../config/environment'
 
 
 CLI.render_ascii_art
-Parser.slice_and_dice
+Parser.load_raw_data
 CLI.input 
 
