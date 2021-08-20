@@ -5,35 +5,42 @@ class CLI
  
 def self.input
 
-
     puts "\nHello weary traveler! Would you like some human data?\n".colorize(:yellow)
     puts "\nI can organize it in 3 ways:\n".colorize(:yellow)
     puts "\nTo sort by gender, type 'g'" 
     puts "\nTo sort by birth date, type 'b'"
     puts "\nTo sort by last name (descending), type: 'l'"
+    puts "\nType 'exit' to get outta here.".colorize(:red)
 
-    Parser.slice_and_dice
     input = gets.chomp.strip 
-
-    case 
-      when input_2 == "poem history" then self.poem_history
-      when input_2 == "new poem" then self.input 
-      when input_2 == "exit" then ascii_peace
-      when input_2 != "poem history" || input_2 != "new poem" ||  input_2 != "exit" then input_after 
-    end
-
     puts "You got it, boss. Coming right up!\n".colorize(:yellow)
-   # Parser.slice_and_dice
-    
-    input_after
+    Parser.slice_and_dice
 
+    case input
+      when "g" then self.sort_by_gender
+      when "b" then self.sort_by_birthdate
+      when "l" then self.sort_by_lastname_desc
+      when "exit" then ascii_peace
+    end
    
 end
 
 
-def self.input_after
+def self.sort_by_gender
+    records = Record.all 
+    gender_sorted = records.sort_by{|record|[record.gender,record.lastname]}
+    gender_sorted.each do |record|
+        puts "#{record.lastname} #{record.firstname} #{record.gender} #{record.date_of_birth} #{record.favorite_color}"
+    end
+end
 
-  
+
+def self.sort_by_birthdate
+
+end
+
+
+def self.sort_by_lastname_desc
 
 end
 
@@ -53,7 +60,7 @@ def self.render_ascii_art
   end
 
   def self.ascii_peace
-    puts "\nHopefully we can spit some more fire soon, Peace.".colorize(:yellow)
+    puts "\nTil' we meet again, traveller.".colorize(:yellow)
     puts " 
     
     .''.    .'',
@@ -68,7 +75,7 @@ def self.render_ascii_art
     (  ' \ '-  |
      \    `.  /
       |      |
-  jxl |      |
+  JXL |      |
     ".colorize(:yellow)
 
     exit! 

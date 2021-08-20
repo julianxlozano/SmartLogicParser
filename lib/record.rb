@@ -8,10 +8,12 @@ class Record
         @lastname = lastname
         @firstname = firstname
         @favorite_color = favorite_color
-        gender == "F" ? @gender = "Female" : @gender = "Male"
+        gender == "F" || gender == "Female" ? @gender = "Female" : @gender = "Male"
         if date_of_birth.include?("-")
             dob = date_of_birth.split("-")
             @date_of_birth = dob.join("/")
+        else
+            @date_of_birth = date_of_birth
         end
         save 
     end
