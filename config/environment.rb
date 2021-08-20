@@ -4,8 +4,8 @@ require 'net/http'
  require 'uri'
  require 'json'
 
- require_relative '../lib/api.rb'
- require_relative '../lib/poem.rb'
+ require_relative '../lib/parser.rb'
+ require_relative '../lib/record.rb'
  require_relative '../lib/cli.rb'
 
 
