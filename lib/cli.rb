@@ -12,6 +12,7 @@ def self.input
     puts "\nTo sort by birth date, type 'b'"
     puts "\nTo sort by last name (descending), type: 'l'"
 
+    Parser.slice_and_dice
     input = gets.chomp.strip 
 
     case 
