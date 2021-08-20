@@ -14,8 +14,8 @@ def self.input
     puts "\nType 'exit' to get outta here.".colorize(:red)
 
     input = gets.chomp.strip 
-    puts "You got it, boss. Coming right up!\n".colorize(:yellow)
-    Parser.slice_and_dice
+    puts "You got it.\n".colorize(:yellow)
+    
 
     case input
       when "g" then self.sort_by_gender
@@ -23,6 +23,9 @@ def self.input
       when "l" then self.sort_by_lastname_desc
       when "exit" then ascii_peace
     end
+
+   
+    self.input
    
 end
 
@@ -34,7 +37,6 @@ def self.sort_by_gender
         puts "#{record.lastname} #{record.firstname} #{record.gender} #{record.bday} #{record.favorite_color}"
     end
 end
-
 
 def self.sort_by_birthdate
  #  records = Record.all 
